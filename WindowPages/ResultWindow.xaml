@@ -1,0 +1,38 @@
+﻿<Window x:Class="TestUtilitiesCalculation.WindowPages.ResultWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestUtilitiesCalculation.WindowPages"
+        mc:Ignorable="d"
+        Title="Результат" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="На нужды ХВС: " VerticalAlignment="Center" HorizontalAlignment="Right"></TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="+" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"></TextBlock>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="На нужды ГВС: " VerticalAlignment="Center" HorizontalAlignment="Right"></TextBlock>
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="+" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"></TextBlock>
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="На нужды ЭЭ: " VerticalAlignment="Center" HorizontalAlignment="Right"></TextBlock>
+        <TextBlock Grid.Row="5" Grid.Column="1" Text="=" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"></TextBlock>
+        <TextBlock Grid.Row="6" Grid.Column="0" Text="Итого:" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBlock>
+        <TextBox x:Name="coldWaterResult" Grid.Row="0" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="16"></TextBox>
+        <TextBox x:Name="hotWaterResult" Grid.Row="2" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="16"></TextBox>
+        <TextBox x:Name="ElectricityResult" Grid.Row="4" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="16"></TextBox>
+        <TextBox x:Name="totalResult" Grid.Row="6" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="16"></TextBox>
+
+        <Button x:Name="confirmButton" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Content="Подтвердить" Click="confirmButton_Click"></Button>
+    </Grid>
+</Window>

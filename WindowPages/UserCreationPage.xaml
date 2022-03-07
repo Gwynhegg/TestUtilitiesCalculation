@@ -1,0 +1,47 @@
+﻿<Page x:Class="TestUtilitiesCalculation.WindowPages.UserCreationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TestUtilitiesCalculation.WindowPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Создание пользователя">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" MaxHeight="20"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="1*" MaxHeight="20"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="4*"></RowDefinition>
+            <RowDefinition Height="1*" MaxHeight="20"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="1*" MaxHeight="20"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" MaxWidth="30"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*" MaxWidth="30"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Пожалуйста, введите свой адрес (очень рекомендуется делать это латинницей)" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Bottom"></TextBlock>
+        <TextBox x:Name="addressTextBox" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"></TextBox>
+        <TextBlock x:Name="residentsCountText" Text="Количество проживающих человек: " Grid.Row="4" Grid.Column="1" VerticalAlignment="Center"></TextBlock>
+        <Slider x:Name="residentsCount" Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" SmallChange="1" Minimum="1" ValueChanged="residentsCount_ValueChanged"></Slider>
+        <Grid Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <CheckBox x:Name="hasColdWaterMeter" Content="Есть прибор учета ХВС" Grid.Row="0" VerticalAlignment="Center"></CheckBox>
+            <CheckBox x:Name="hasHotWaterMeter" Content="Есть прибор учета ГВС" Grid.Row="1" VerticalAlignment="Center"></CheckBox>
+            <CheckBox x:Name="hasElectricityMeter" Content="Есть прибор учета электроэнергии" Grid.Row="2" VerticalAlignment="Center"></CheckBox>
+        </Grid>
+        <Button x:Name="goBack" Content="Назад" Grid.Row="7" Grid.Column="1" Click="goBack_Click"></Button>
+        <Button x:Name="goAndSave" Content="Сохранить" Grid.Row="7" Grid.Column="3" Click="goAndSave_Click"></Button>
+
+    </Grid>
+</Page>

@@ -1,0 +1,7 @@
+Cold Water Supply,35.78,4.85,m3
+Hot Water Supply,158.98,4.01,m3
+Electricity,4.28,164,kWh
+Electricity Day,4.9,NULL,kWh
+Electricity Night,2.31,NULL,kWh
+Hot Water Delivery,35.78,4.01,m3
+Hot Water Heating,998.69,0.05349,Gcal
