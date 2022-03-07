@@ -108,9 +108,9 @@ namespace TestUtilitiesCalculation.Accounts
 
             // Электричество:
             if (electricityAccount is NormativeBill)
-                calculateHotWater(electricityAccount as NormativeBill, user, services, readings);
+                calculateElectricity(electricityAccount as NormativeBill, user, services, readings);
             else
-                calculateHotWater(electricityAccount as VolumeBill, user, services, readings);
+                calculateElectricity(electricityAccount as VolumeBill, user, services, readings);
 
         }
 
@@ -135,9 +135,7 @@ namespace TestUtilitiesCalculation.Accounts
         {
             totalResult += hotWaterAccount.makeCalculation((double)readings[HOT_READING] - user.hotMeter.accumulatedVolume, services.getTariffByID(HOT_WATER_DELIVERY_ID));
             totalResult += hotWaterHeatingAccount.makeCalculation(hotWaterAccount.basicQuantity * services.getNormByID(HOT_WATER_HEATING_ID), services.getTariffByID(HOT_WATER_HEATING_ID));
-#pragma warning disable CS8629 // Тип значения, допускающего NULL, может быть NULL.
             user.hotMeter.accumulatedVolume = (double)readings[HOT_READING];
-#pragma warning restore CS8629 // Тип значения, допускающего NULL, может быть NULL.
             user.hotMeter.accumulatedHeatingVolume = hotWaterAccount.basicQuantity * services.getNormByID(HOT_WATER_HEATING_ID);
         }
 

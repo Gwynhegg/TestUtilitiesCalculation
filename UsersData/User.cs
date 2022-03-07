@@ -62,7 +62,7 @@ namespace TestUtilitiesCalculation.UsersData
             // Создаем UPDATE запрос для обновления информации о наличии счетчиков и о накопленном объеме
             var updateQuery = String.Format("UPDATE users SET hasColdWaterMeter = {0}, hasHotWaterMeter = {1}, hasEnergyMeter = {2}, " +
                 "coldWaterVolume = {3}, hotWaterSupplyVolume = {4}, HotWaterHeatingVolume = {5}, dayEnergyVolume = {6}, nightEnergyVolume = {7} " +
-                "WHERE userID = {8};", this.hasColdWaterMeter ? "FALSE" : "TRUE", this.hasHotWaterMeter ? "FALSE" : "TRUE", this.hasElectricityMeter ? "FALSE" : "TRUE",
+                "WHERE userID = {8};", this.hasColdWaterMeter ? "TRUE" : "FALSE", this.hasHotWaterMeter ? "TRUE" : "FALSE", this.hasElectricityMeter ? "TRUE" : "FALSE",
                 this.coldMeter is null ? 0 : this.coldMeter.accumulatedVolume.ToString().Replace(',', '.'),
                 this.hotMeter is null ? 0 : this.hotMeter.accumulatedVolume.ToString().Replace(',', '.'),
                 this.hotMeter is null ? 0 : this.hotMeter.accumulatedHeatingVolume.ToString().Replace(',', '.'),
