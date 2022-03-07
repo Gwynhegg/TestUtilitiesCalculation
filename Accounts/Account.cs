@@ -108,9 +108,9 @@ namespace TestUtilitiesCalculation.Accounts
 
             // Электричество:
             if (electricityAccount is NormativeBill)
-                calculateHotWater(electricityAccount as NormativeBill, user, services, readings);
+                calculateElectricity(electricityAccount as NormativeBill, user, services, readings);
             else
-                calculateHotWater(electricityAccount as VolumeBill, user, services, readings);
+                calculateElectricity(electricityAccount as VolumeBill, user, services, readings);
 
         }
 
