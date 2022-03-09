@@ -49,7 +49,7 @@ namespace TestUtilitiesCalculation.UsersData
         }
 
         // Метод для обновления данных о пользователе в случае подтверждения формы заполнения показаний
-        public void refreshUser(User tempUser, Auxiliary.DatabaseConnector connector)
+        public void refreshUser(User tempUser)
         {
             // Обновляем данные о конфигурации счетчиков...
             if (tempUser.hasColdWaterMeter) this.coldMeter = tempUser.coldMeter.Clone();
@@ -68,7 +68,7 @@ namespace TestUtilitiesCalculation.UsersData
                 this.hotMeter is null ? 0 : this.hotMeter.accumulatedHeatingVolume.ToString().Replace(',', '.'),
                 this.electricityMeter is null ? 0 : this.electricityMeter.accumulatedVolume.ToString().Replace(',', '.'),
                  this.electricityMeter is null ? 0 : this.electricityMeter.accumulatedNightVolume.ToString().Replace(',', '.'), this.Id);
-            connector.ExecuteNonQuaryCommand(updateQuery);
+            Auxiliary.DatabaseConnector.getInstance().ExecuteNonQuaryCommand(updateQuery);
         }
     }
 }

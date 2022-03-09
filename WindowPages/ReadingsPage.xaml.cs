@@ -99,7 +99,7 @@ namespace TestUtilitiesCalculation.WindowPages
         {
 
             // отображаем информацию о пользователе
-            currentMonthText.Text = "Текущий месяц: " + account.getDateOfLastAccount(parent.connector, user);
+            currentMonthText.Text = "Текущий месяц: " + account.getDateOfLastAccount(user);
             userInfoText.Text = "ID : " + user.Id + " , Адрес : " + user.residentialAddress + " , количество жильцов : " + user.residentsCount;
 
             // отображаем информацию о наличии ПУ и блокируем соответствующие поля
@@ -141,8 +141,8 @@ namespace TestUtilitiesCalculation.WindowPages
 
         private void goForward_Click(object sender, RoutedEventArgs e)      // метод, подтверждающий введенные данные, после чего произойдет переход на новую страницу
         {
-            user.refreshUser(tempUser, parent.connector);      // обновляем данные о текущем пользователе с занесением в БД
-            account.saveResult(parent.connector);      // сохраняем результаты транзакции в отдельную таблицу
+            user.refreshUser(tempUser);      // обновляем данные о текущем пользователе с занесением в БД
+            account.saveResult();      // сохраняем результаты транзакции в отдельную таблицу
             parent.Content = new ReadingsPage(parent, user);        // переходим к следующему месяцу
         }
 

@@ -2,12 +2,20 @@
 
 namespace TestUtilitiesCalculation.Auxiliary
 {
-    public class DatabaseConnector
+    public sealed class DatabaseConnector
     {
+        private DatabaseConnector() { }
 
+        private static DatabaseConnector instance;
         private static SqliteConnection connection;
 
-        public DatabaseConnector(string connectionString)
+        public static DatabaseConnector getInstance()
+        {
+            if (instance == null) instance = new DatabaseConnector();
+            return instance;
+        }
+
+        public void setDatabaseConnector(string connectionString)
         {
             connection = new SqliteConnection(connectionString);
         }

@@ -22,7 +22,7 @@ namespace TestUtilitiesCalculation.WindowPages
         private void createDataTable()       // метод для создания и отображения таблицы с транзакциями
         {
             var selectQuery = "SELECT * FROM accounts;";
-            var reader = parent.connector.ExecuteReaderCommand(selectQuery);
+            var reader = Auxiliary.DatabaseConnector.getInstance().ExecuteReaderCommand(selectQuery);
 
             DataTable table = new DataTable();
             table.Columns.Add("Account ID", typeof(string));

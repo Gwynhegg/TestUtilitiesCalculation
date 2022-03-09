@@ -9,10 +9,10 @@ namespace TestUtilitiesCalculation.Services
         private List<Service> services = new List<Service>();       // здес хранятся услуги
 
         // При создании класса устанавливается соединение с БД и достается набор всех услуг, после чего они добавляются в коллекцию
-        public ServicesSet(Auxiliary.DatabaseConnector connector)
+        public ServicesSet()
         {
             string selectTariffsQuery = "SELECT * FROM services";
-            var reader = connector.ExecuteReaderCommand(selectTariffsQuery);
+            var reader = Auxiliary.DatabaseConnector.getInstance().ExecuteReaderCommand(selectTariffsQuery);
             while (reader.Read())
                 addService(reader);
         }

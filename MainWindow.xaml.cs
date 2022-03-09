@@ -14,7 +14,6 @@ namespace TestUtilitiesCalculation
 
         public UsersData.UsersSet usersSet { get; private set; }     // Экземпляр класса для хранения данных пользователей
         public Services.ServicesSet servicesSet { get; private set; }        // Экземпляр класса для хранения данных об услугах
-        public Auxiliary.DatabaseConnector connector { get; private set; }
 
         public MainWindow()
         {
@@ -22,8 +21,8 @@ namespace TestUtilitiesCalculation
 
             setDatabaseConnection();
 
-            servicesSet = new Services.ServicesSet(connector);     // устанавливаем соединение с БД и выгружаем список услуг
-            usersSet = new UsersData.UsersSet(connector);      // устанавливаем соединение с БД и выгружаем данные пользователей
+            servicesSet = new Services.ServicesSet();     // устанавливаем соединение с БД и выгружаем список услуг
+            usersSet = new UsersData.UsersSet();      // устанавливаем соединение с БД и выгружаем данные пользователей
 
             mainPage = new WindowPages.MainPage(this);      // создаем первоначальную страницу
             mainPage.getUsersData();
@@ -39,7 +38,8 @@ namespace TestUtilitiesCalculation
         private void setDatabaseConnection()        // устанавливаем соединение с базой данных SQLite
         {
             var connectionString = "Data Source=testDatabase.db;Mode=ReadWriteCreate;";
-            this.connector = new Auxiliary.DatabaseConnector(connectionString);
+            var connector = Auxiliary.DatabaseConnector.getInstance();
+            connector.setDatabaseConnector(connectionString);
 
             createServicesTable();       // проверяем/создаем таблицу с тарифами
             createUsersTable();     // проверяем/создаем таблицу с юзерами
@@ -51,7 +51,7 @@ namespace TestUtilitiesCalculation
 
             // Проверяем, есть ли таблица tariffs в базе данных
             string checkingQuery = "SELECT name FROM sqlite_master WHERE type='table' AND name='services';";
-            var reader = connector.ExecuteScalarCommand(checkingQuery);
+            var reader = Auxiliary.DatabaseConnector.getInstance().ExecuteScalarCommand(checkingQuery);
 
             // Если таблицы нет, вызываем метод для первичного заполнения таблицы services
             if (reader is not null) return;
@@ -63,7 +63,7 @@ namespace TestUtilitiesCalculation
                 "norm REAL," +
                 "measure VARCHAR(5)," +
                 "UNIQUE (nameOfService));";
-            connector.ExecuteNonQuaryCommand(creationQuery);
+            Auxiliary.DatabaseConnector.getInstance().ExecuteNonQuaryCommand(creationQuery);
 
             // Считываем данные о тарифах из CSV-файла
             using (StreamReader streamReader = new StreamReader(@"..\..\..\Auxiliary/TarrifsText.csv"))
@@ -76,7 +76,7 @@ namespace TestUtilitiesCalculation
                     // помещаем данные в таблицу
                     inputQuery = String.Format("INSERT INTO services (nameOfService, tariff, norm, measure)" +
                         " VALUES ('{0}',{1},{2},'{3}');", lineElements);
-                    connector.ExecuteNonQuaryCommand(inputQuery);
+                    Auxiliary.DatabaseConnector.getInstance().ExecuteNonQuaryCommand(inputQuery);
                 }
             }
         }
@@ -97,7 +97,7 @@ namespace TestUtilitiesCalculation
             "dayEnergyVolume REAL NOT NULL," +
             "nightEnergyVolume REAL NOT NULL," +
             "UNIQUE (residentialAddress));";
-            connector.ExecuteNonQuaryCommand(creationQuery);
+            Auxiliary.DatabaseConnector.getInstance().ExecuteNonQuaryCommand(creationQuery);
         }
 
         private void createAccountsTable()
@@ -116,7 +116,7 @@ namespace TestUtilitiesCalculation
             "totalResult REAL NOT NULL," +
             "accountRepaid BOOL NOT NULL," +
             "FOREIGN KEY (userID) REFERENCES users(userID));";
-            connector.ExecuteNonQuaryCommand(creationQuery);
+            Auxiliary.DatabaseConnector.getInstance().ExecuteNonQuaryCommand(creationQuery);
         }
     }
 }

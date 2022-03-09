@@ -10,10 +10,10 @@ namespace TestUtilitiesCalculation.UsersData
         private List<User> users = new List<User>();        // Коллекция пользователей
 
         // Конструктор, устанавливающий соединение с базой данных и заполняющий коллекцию пользователей
-        public UsersSet(Auxiliary.DatabaseConnector connector)
+        public UsersSet()
         {
             string selectTariffsQuery = "SELECT * FROM users";
-            var reader = connector.ExecuteReaderCommand(selectTariffsQuery);
+            var reader = Auxiliary.DatabaseConnector.getInstance().ExecuteReaderCommand(selectTariffsQuery);
             while (reader.Read())
                 addUser(reader);
         }
@@ -46,10 +46,10 @@ namespace TestUtilitiesCalculation.UsersData
         }
 
         // Метод для обновления списка пользователей. Нужен для отображения коллекции на главной форме после добавления нового пользователя
-        public void Refresh(Auxiliary.DatabaseConnector connector)
+        public void Refresh()
         {
             string selectTariffsQuery = "SELECT * FROM users ORDER BY userID DESC LIMIT 1";
-            var reader = connector.ExecuteReaderCommand(selectTariffsQuery);
+            var reader = Auxiliary.DatabaseConnector.getInstance().ExecuteReaderCommand(selectTariffsQuery);
             while (reader.Read())
                 addUser(reader);
         }

@@ -158,11 +158,11 @@ namespace TestUtilitiesCalculation.Accounts
         /// <param name="connection">Соединение с базой данных</param>
         /// <param name="user">Конкретный пользователь, данные которого мы хотим найти</param>
         /// <returns>Возвращает индекс текущего неуплаченного месяца, по формуле (последний уплаченный месяц + 1)</returns>
-        public int getDateOfLastAccount(Auxiliary.DatabaseConnector connector, UsersData.User user)
+        public int getDateOfLastAccount(UsersData.User user)
         {
             string getLastQuery = String.Format("SELECT dateOfReadings FROM accounts " +
                 "WHERE userID = {0} ORDER BY dateOfReadings DESC LIMIT 1", user.Id);
-            var request = connector.ExecuteScalarCommand(getLastQuery);
+            var request = Auxiliary.DatabaseConnector.getInstance().ExecuteScalarCommand(getLastQuery);
 
             // Если данных нет, значит, пользователь еще не пользовался услугами и начинает оплату с нулевого месяца
             if (request is null) dateOfReadings = 0; else dateOfReadings = Int32.Parse(request.ToString()) + 1;
@@ -171,7 +171,7 @@ namespace TestUtilitiesCalculation.Accounts
         }
 
         // Метод для записи результата транзакции в базу данных
-        public void saveResult(Auxiliary.DatabaseConnector connector)
+        public void saveResult()
         {
             string insertTransactionQuery = String.Format("INSERT INTO accounts (" +
             "userID, residentialAddress, dateOfReadings, coldWaterAccount, hotWaterAccount, hotWaterHeatingAccount, ElectricityAccount, ElectricityNightAccount, totalResult,accountRepaid) " +
@@ -179,7 +179,7 @@ namespace TestUtilitiesCalculation.Accounts
             hotWaterAccount.totalCost.ToString().Replace(',', '.'), hotWaterHeatingAccount is null ? "NULL" : hotWaterHeatingAccount.totalCost.ToString().Replace(',', '.'),
             electricityAccount.totalCost.ToString().Replace(',', '.'), electricityNightAccount is null ? "NULL" : electricityNightAccount.totalCost.ToString().Replace(',', '.'),
             totalResult.ToString().Replace(',', '.'), true);
-            connector.ExecuteNonQuaryCommand(insertTransactionQuery);
+            Auxiliary.DatabaseConnector.getInstance().ExecuteNonQuaryCommand(insertTransactionQuery);
         }
     }
 }
